@@ -20,6 +20,7 @@ log = logging.getLogger(__name__)
 TIMEFORMAT = "%Y-%m-%d %H:%M:%S"
 RUNTIME = datetime.now()
 TIMESTAMP = RUNTIME.strftime(TIMEFORMAT)
+MAX_ERRORS = 50_000
 
 
 class FileError(BaseModel):
@@ -230,6 +231,11 @@ def save_errors_metadata(
         meta_dict = {}
     else:
         state = "FAIL"
+        """There is a BSON limit of 22699725 bytes, so cap out error list at 50k."""
+        if len(errors) > MAX_ERRORS:
+            log.warning(f"Errors list too large, truncating to {MAX_ERRORS}")
+            errors = errors[0:MAX_ERRORS]
+
         meta_dict = {"data": errors}
 
     gtk_context.metadata.add_qc_result(

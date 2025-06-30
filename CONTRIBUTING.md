@@ -40,14 +40,14 @@ Dependencies are listed in the `pyproject.toml` file.
 
 Poetry manages virtual environments and can create a virtual environment
 with different versions of python,
-however that version must be installed on the machine.  
+however that version must be installed on the machine.
 
 You can configure the python version
 by using `poetry env use <path/to/executable>`
 
 #### Helpful poetry config options
 
-See full options [Here](https://python-poetry.org/docs/configuration/#available-settings).
+[See full options here](https://python-poetry.org/docs/configuration/#available-settings).
 
 List current config: `poetry config --list`
 
@@ -58,7 +58,7 @@ create virtual environment inside project directory
 ## Linting and Testing
 
 Local linting and testing scripts
-are managed through [`pre-commit`](https://pre-commit.com/).  
+are managed through [`pre-commit`](https://pre-commit.com/).
 Pre-commit allows running hooks which can be defined locally, or in other
 repositories. Default hooks to run on each commit:
 
@@ -87,9 +87,9 @@ or just be disabled.
 ## Adding a contribution
 
 Every contribution should be
-associated with a ticket on the GEAR JIRA board, or be a hotfix.  
+associated with a ticket on the GEAR JIRA board, or be a hotfix.
 You should contribute by creating
-a branch titled with either `hotfix-<hotfix_name` or `GEAR-<gear_num>-<description>`.  
+a branch titled with either `hotfix-<hotfix_name` or `GEAR-<gear_num>-<description>`.
 For now, other branch names will be accepted,
 but soon branch names will be rejected
 if they don't follow this pattern.
@@ -137,6 +137,6 @@ git push origin --tags
 
 Once you've pushed tags,
 you can go to the gitlab UI -> Project Overview -> Releases and
-create a new release.  
+create a new release.
 You can copy the release notes that are
 already populated in the `docs/release_notes.md` document.

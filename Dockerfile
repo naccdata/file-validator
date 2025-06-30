@@ -2,7 +2,7 @@
 # Base stage: set up environment and install system dependencies
 # -----------------------------------------------------------------------------
 
-FROM flywheel/python:3.10-main AS base
+FROM flywheel/python:3.13-main AS base
 
 # Set environment variable for the application directory
 ENV FLYWHEEL="/flywheel/v0"

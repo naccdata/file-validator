@@ -65,13 +65,13 @@ Validates a json or csv file based on a provided validation schema
     - __Type__: *boolean*
     - __Description__: *If validating Flywheel Objects, add the parent containers of the object to the schema for validation*
     - __Default__: *false*
-  
+
   - *tag*:
     - __Name__: *tag*
     - __Type__: *string*
     - __Description__: *Tag to attach to files that gear runs on upon run completion*
 
-  - *debug*: 
+  - *debug*:
     - __Name__: *debug*
     - __Type__: *boolean*
     - __Description__: *Tag to attach to files that gear runs on upon run completion*
@@ -110,7 +110,7 @@ where each error object has the following keys:
   "container_id": "str – ID of the source container/file ",
   "value": "str – current value",
   "expected": "str – expected value",
-  "message": "str – error message description" 
+  "message": "str – error message description"
  }
 ```
 
@@ -126,7 +126,7 @@ For JSON input file:
 For CSV input file:
 
 ```
-{ “line”: "int - the row number that raised the error", 
+{ “line”: "int - the row number that raised the error",
 “column_name”: "str - the column name that raised the error" }
 ```
 
@@ -160,7 +160,7 @@ For a json file there are two validation checks that are done:
 ##### CSV:
 For a csv file, two validation checks are performed:
 1. Empty File Validation - checks to see if the file is empty.
-2. Header Validation - Checks to see that a header is present, AND if the header 
+2. Header Validation - Checks to see that a header is present, AND if the header
 has any extra columns NOT specified in the schema.
 3. Schema Validation - Each row is turned into a json object with
 `key:value` pairs, where the key comes from the column headers, and the values
@@ -168,13 +168,13 @@ come from the cells in the given row. Each row is then validated against the
 schema.
 
 #### Typing for CSV
-CSVs are inherently untyped, so the exact type of each column must be provided 
-in the jsonschema file. By default, python will read everything as a string, 
-including blank spaces, which get read as an empty string (`''`). We then use 
+CSVs are inherently untyped, so the exact type of each column must be provided
+in the jsonschema file. By default, python will read everything as a string,
+including blank spaces, which get read as an empty string (`''`). We then use
 default python casting rules to attempt to cast these values to specified types.
-Because of the complications of determining a true intended type on an untyped 
-list of string, we do NOT allow columns to be multiple types. This means that 
-in your jsonschema, a property's `type` can NOT be a list of types. 
+Because of the complications of determining a true intended type on an untyped
+list of string, we do NOT allow columns to be multiple types. This means that
+in your jsonschema, a property's `type` can NOT be a list of types.
 
 Not allowed:
 ` "INVALID_property": {"type": ["integer", "bool"] }`
@@ -182,9 +182,9 @@ Not allowed:
 Nulls are handled in the following way: If a row has a blank cell, that value
 is treated as null, and
 is removed from the row dictionary for validation. This does not modify the
-original data in any way, just the data that's passed to the validator. 
+original data in any way, just the data that's passed to the validator.
 
-This way, if that cell was required, the schema will catch it as a missing 
+This way, if that cell was required, the schema will catch it as a missing
 vaule, but if it was optional, the schema will pass as intended.
 
 Here is a list of considerations when setting types for CSV:
@@ -227,7 +227,7 @@ to modify your schema to account for this in the following way:
 ```
 
 
-6. All data is initially read in as string. This is important for casting in 
+6. All data is initially read in as string. This is important for casting in
 python for the following reasons:
    - Python sees ANY string of ANY value as "true" when you try
    to cast the string to a boolean. Only the empty string `''` is recognized as
@@ -238,7 +238,7 @@ python for the following reasons:
     ```
 
    - Python will convert an integer to a float if it's a string. Technically this
-     aligns with javascript's type definition anyways, as "number" means either an 
+     aligns with javascript's type definition anyways, as "number" means either an
      int or a float, but it is important to be aware that a column with type "number"
      will convert `"123"` to `123.0`:
 
@@ -248,7 +248,7 @@ python for the following reasons:
     ```
 
 The chart below shows the various casting results from different strings
-that might be read in, to different types. 
+that might be read in, to different types.
 
 | value        | int(value)   | float(value) | bool(value) | `str(value)` |
 |--------------|--------------|--------------|------------|--------------|
@@ -274,7 +274,7 @@ against the JSONSchema
 ##### *validation_schema*
 
 The JSONSchema to use to validate the file and/or container metadata must be provided
-as a gear input and much easier describe the content of the file or the metadata 
+as a gear input and much easier describe the content of the file or the metadata
 extracted. The file content must be a valid JSON following the [JSONSchema](https://json-schema.org/) standard.
 
 For example, if the `input_file` is a JSON with the following content:
@@ -308,7 +308,7 @@ and the following JSONSchema is used:
 }
 ```
 
-The gear will validate the content of the `input_file` and generates a report 
+The gear will validate the content of the `input_file` and generates a report
 of any validation errors it finds. The report is saved on the metadata.
 
 
@@ -329,7 +329,7 @@ graph LR;
     end
     G-->F
  F[Output QC\nMetadata]:::container;
-    
+
     classDef container fill:#57d,color:#fff
     classDef input fill:#7a9,color:#fff
     classDef gear fill:#659,color:#fff

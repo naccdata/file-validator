@@ -1,6 +1,6 @@
 [project]
 name = "fw_gear_file_validator"
-version = "0.3.2"
+version = "0.3.4"
 description = "Validates a file"
 authors = [{ name = "flywheel", email="support@flywheel.io" }]
 requires-python = "~=3.13"

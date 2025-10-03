@@ -1,6 +1,6 @@
 repos:
   - repo: https://gitlab.com/flywheel-io/tools/etc/qa-ci
-    rev: b783285a315e509aaf189222ba94601de659ed5c
+    rev: 370fbfea2174dff02f4a2d8c48e52b1e7d7e5cb3
     hooks:
       - id: pyproject_export
       - id: gearcheck

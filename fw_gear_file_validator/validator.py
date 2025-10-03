@@ -323,5 +323,7 @@ def initialize_validator(
         return JsonValidator(schema)
     elif file_type == "csv":
         return CsvValidator(schema)
+    elif file_type == "flywheel":
+        return JsonValidator(schema)
     else:
         raise ValueError("file type " + file_type + " Not supported")

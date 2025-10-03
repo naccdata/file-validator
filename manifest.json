@@ -57,18 +57,29 @@
     },
     "gear-builder": {
       "category": "qa",
-      "image": "flywheel/file-validator:0.3.4"
+      "image": "flywheel/file-validator:0.3.5-rc.0"
     }
   },
   "description": "Validates a file based on a provided validation schema",
   "environment": {
     "FLYWHEEL": "/flywheel/v0",
-    "PYTHON_VERSION": "3.13.2",
+    "PYTHON_VERSION": "3.13.7",
     "PWD": "/flywheel/v0",
     "LANG": "C.UTF-8",
     "VIRTUAL_ENV": "/venv",
     "PYTHONPATH": "/venv/lib/python/site-packages",
-    "PATH": "/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin"
+    "PATH": "/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin",
+    "SHLVL": "1",
+    "GPG_KEY": "7169605F62C751356D054A26A821E680E5FA6305",
+    "PYTHON_SHA256": "5462f9099dfd30e238def83c71d91897d8caa5ff6ebc7a50f14d4802cdaaa79a",
+    "COMMIT_SHA": "f6c958cf",
+    "COMMIT_REF": "main",
+    "BUILD_TIME": "2025-08-30T07:44:50Z",
+    "CI_JOB_URL": "https://gitlab.com/flywheel-io/tools/img/python/-/jobs/11193846543",
+    "EGET_BIN": "/opt/bin",
+    "UV_NO_CACHE": "1",
+    "TZ": "UTC",
+    "EDITOR": "micro"
   },
   "inputs": {
     "api-key": {
@@ -90,5 +101,5 @@
   "name": "file-validator",
   "source": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator.git",
   "url": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator.git",
-  "version": "0.3.4"
+  "version": "0.3.5-rc.0"
 }

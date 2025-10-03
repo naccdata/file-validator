@@ -8,7 +8,7 @@ JSONSchema file. It can be run at the project, subject, session or acquisition l
 
 ### Summary
 
-Validates a json or csv file based on a provided validation schema
+Validates Flywheel file content (JSON or CSV) or file metadata against a user provided JSONSchema file.
 
 ### License
 

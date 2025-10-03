@@ -1,20 +1,16 @@
-*
-!fw_gear_file_validator/
-!tests/
-!.dockerignore
-!.gitignore
-!.gitlab-ci.yml
-!.pre-commit-config.yaml
-!CONTRIBUTING.md
-!Dockerfile
-!FAQ.md
-!LICENSE
-!manifest.json
-!poetry.lock
-!pyproject.toml
-!README.md
-!requirements.txt
-!requirements-dev.txt
-!run.py
-!.github/
-!uv.lock
+# Python stuff
+*.egg-info
+.coverage
+__pycache__
+coverage.xml
+.coverage
+cov.xml
+dist
+junit.xml
+
+# Mac stuff
+.DS_Store
+
+# Editor specific stuff
+.vscode
+.idea

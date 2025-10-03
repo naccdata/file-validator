@@ -4,7 +4,12 @@ import tempfile
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from fw_gear_file_validator.loader import CsvLoader, FwLoader, JsonLoader
+from fw_gear_file_validator.loader import (
+    PARENT_INCLUDE,
+    CsvLoader,
+    FwLoader,
+    JsonLoader,
+)
 from fw_gear_file_validator.utils import FwReference
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -157,3 +162,52 @@ def test_validate_file_header_duplicate():
     mock_file = io.StringIO("header1,header2,header2\n")
     result = CsvLoader.validate_file_header(mock_file)
     assert result is not None
+
+
+def test_fw_loader_parent_include_fields():
+    """Test that FwLoader includes the new file metadata fields."""
+
+    expected_file_fields = [
+        "name",
+        "classification",
+        "modality",
+        "size",
+        "version",
+        "zip_member_count",
+        "created",
+        "modified",
+    ]
+
+    for field in expected_file_fields:
+        assert field in PARENT_INCLUDE
+
+
+def test_fw_loader_filter_container():
+    """Test that FwLoader properly filters container to include only specified fields."""
+
+    mock_container_data = {
+        "name": "test_file.json",
+        "classification": {"Intent": ["functional"]},
+        "modality": "MR",
+        "size": 1024,
+        "version": 1,
+        "created": "2023-01-01T00:00:00Z",
+        "modified": "2023-01-01T00:00:00Z",
+        "zip_member_count": 0,
+        "unwanted_field": "should_be_filtered",
+    }
+
+    mock_container = MagicMock()
+    mock_container.to_dict.return_value = mock_container_data
+
+    result = FwLoader._filter_container(mock_container)
+
+    assert "name" in result
+    assert "classification" in result
+    assert "modality" in result
+    assert "size" in result
+    assert "version" in result
+    assert "created" in result
+    assert "modified" in result
+    assert "zip_member_count" in result
+    assert "unwanted_field" not in result

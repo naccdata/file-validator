@@ -19,6 +19,15 @@ PARENT_INCLUDE = [
     "label",
     "info",
     "uid",
+    "created",
+    "modified",
+    # File values
+    "name",
+    "classification",
+    "modality",
+    "size",
+    "version",
+    "zip_member_count",
     # Session values
     "age",
     "weight",

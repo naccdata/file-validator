@@ -47,7 +47,7 @@ class FileError(BaseModel):
         # handle required:
         if self.code == "required":
             key = self.message[1 : self.message.find("' is a required property")]
-            self.location = {"key_path": key}
+            self.location["key_path"] = self.location["key_path"] + "." + key
             self.value = ""
             self.expected = ""
 
@@ -209,7 +209,11 @@ def add_flywheel_location_to_errors(fw_ref: FwReference, packaged_errors: list):
             e["container_id"] = hierarchy["file"]["file_id"]
     else:
         for e in packaged_errors:
-            location = e["location"].split(".")[0]
+            if "key_path" in e["location"]:
+                # e.g. 'properties.file.properties...'
+                location = e["location"]["key_path"].split(".")[1]
+            # else:
+            #     location = e["location"].split(".")[1]
             if location not in PARENT_ORDER:
                 raise ValueError(
                     f"Value {location} not valid flywheel hierarchy location"

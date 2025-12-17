@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.3.6
+
+### Maintenance
+
+- Updated dependencies to address known vulnerabilities
+
 ## 0.3.5
 
 ### Bug Fixes

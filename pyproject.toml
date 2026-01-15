@@ -15,7 +15,6 @@ dependencies = [
     "fw-file>=3.3.3,<4",
     "flywheel-gear-toolkit>=0.6.10,<0.7",
     "flywheel-sdk>=20.3.0",
-    "argparse==1.4.0",
     "pydantic>=2.4.2,<3",
 ]
 

@@ -57,34 +57,36 @@
     },
     "gear-builder": {
       "category": "qa",
-      "image": "flywheel/file-validator:0.3.6"
+      "image": "flywheel/file-validator:0.3.7-rc.02"
     }
   },
   "description": "Validates a file based on a provided validation schema",
   "environment": {
-    "BUILD_TIME": "2025-12-13T07:44:55Z",
-    "CI_JOB_URL": "https://gitlab.com/flywheel-io/tools/img/python/-/jobs/12426556750",
+    "BUILD_TIME": "2026-05-16T22:29:32Z",
+    "CI_JOB_URL": "https://gitlab.com/flywheel-io/tools/img/python/-/jobs/14403519717",
     "COMMIT_REF": "main",
-    "COMMIT_SHA": "92ce9c59",
+    "COMMIT_SHA": "424a5c77",
     "EDITOR": "micro",
     "EGET_BIN": "/opt/bin",
     "FLYWHEEL": "/flywheel/v0",
     "GPG_KEY": "7169605F62C751356D054A26A821E680E5FA6305",
     "LANG": "C.UTF-8",
-    "PATH": "/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin",
+    "PATH": "/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin:/opt/bin",
     "PWD": "/flywheel/v0",
     "PYTHONDONTWRITEBYTECODE": "1",
     "PYTHONPATH": "/venv/lib/python3.13/site-packages",
     "PYTHON_SHA256": "16ede7bb7cdbfa895d11b0642fa0e523f291e6487194d53cf6d3b338c3a17ea2",
     "PYTHON_VERSION": "3.13.11",
-    "SHLVL": "1",
+    "SHLVL": "0",
+    "SSL_CERT_FILE": "/etc/ssl/certs/ca-certificates.crt",
     "TZ": "UTC",
     "UV_COMPILE_BYTECODE": "1",
     "UV_LINK_MODE": "copy",
     "UV_NO_CACHE": "1",
     "UV_PYTHON": "/venv/bin/python",
     "UV_PYTHON_DOWNLOADS": "never",
-    "VIRTUAL_ENV": "/venv"
+    "VIRTUAL_ENV": "/venv",
+    "_": "/usr/bin/printenv"
   },
   "inputs": {
     "api-key": {
@@ -106,5 +108,5 @@
   "name": "file-validator",
   "source": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator.git",
   "url": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator.git",
-  "version": "0.3.6"
+  "version": "0.3.7-rc.02"
 }

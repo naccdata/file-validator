@@ -2,26 +2,20 @@
 
 ## Getting started
 
-1. Follow instructions to [install poetry](https://python-poetry.org/docs/#installation).
+1. Follow instructions to [install
+   uv](https://docs.astral.sh/uv/getting-started/installation/#installing-uv).
 2. Follow instructions to [install pre-commit](https://pre-commit.com/#install)
 
 After cloning the repo:
 
-1. Run `poetry install` to install project and all dependencies
-(see __Dependency management__ below)
-2. Run `pre-commit install` to install pre-commit hooks
-(see __Linting and Testing__ below)
-
-(If you need to change your python version:)
-
-```shell
-poetry env use <path/to/your/python/executable>
-poetry update
-```
+1. Run `uv venv && source .venv/bin/activate && uv sync` to install project
+   and all dependencies (see __Dependency management__ below)
+2. Run `pre-commit install` to install pre-commit hooks (see __Linting and Testing__
+   below)
 
 ## Dependency management
 
-This gear uses [`poetry`](https://python-poetry.org/) to manage dependencies,
+This gear uses [`uv`](https://docs.astral.sh/uv/) to manage dependencies,
 develop, build and publish.
 
 ### Dependencies
@@ -30,54 +24,64 @@ Dependencies are listed in the `pyproject.toml` file.
 
 #### Managing dependencies
 
-* Adding: Use `poetry add [--dev] <dep>`
-* Removing: Use `poetry remove [--dev] <dep>`
-* Updating: Use `poetry update <dep>` or `poetry update` to update all deps.
+* Adding: Use `uv add [--group dev] <dep>`
+* Removing: Use `uv remove [--group dev] <dep>`
+* Updating: Use `uv sync --upgrade <dep>` or `uv sync --upgrade` to update all deps.
   * Can also not update development dependencies with `--no-dev`
   * Update dry run: `--dry-run`
 
 #### Using a different version of python
 
-Poetry manages virtual environments and can create a virtual environment
-with different versions of python,
-however that version must be installed on the machine.
+Poetry manages virtual environments and can create a virtual environment with different
+versions of python, however that version must be installed on the machine.
 
-You can configure the python version
-by using `poetry env use <path/to/executable>`
-
-#### Helpful poetry config options
-
-[See full options here](https://python-poetry.org/docs/configuration/#available-settings).
-
-List current config: `poetry config --list`
-
-* `poetry config virtualenvs.in-project <true|false|None>`:
-create virtual environment inside project directory
-* `poetry config virtualenvs.path <path>`: Path to virtual environment directory.
+You can configure the Python version by using `uv env --python <path/to/executable>`.
+Additionally, it is important to ensure that your Dockerfile is configured
+to use the same Python version as the one specified in your Poetry
+environment.
 
 ## Linting and Testing
 
-Local linting and testing scripts
-are managed through [`pre-commit`](https://pre-commit.com/).
-Pre-commit allows running hooks which can be defined locally, or in other
-repositories. Default hooks to run on each commit:
+Local linting and testing scripts are managed through
+[`pre-commit`](https://pre-commit.com/). Pre-commit allows running hooks
+which can be defined locally, or in other repositories. Default hooks to
+run on each commit:
 
-* check-json: JSON syntax validator
-* check-toml: TOML syntax validator (for pyproject.toml)
-* pretty-format-json: Pretty print json
-* no-commit-to-branch: Don't allow committing to master
-* isort-poetry: Run isort in poetry venv
-* black-poetry: Run black in poetry venv
-* pytest-poetry: Run pytest in poetry venv
+* pyproject_export: Export python dependencies from `pyproject.toml` to
+  `requirements.txt` with `uv`.
+* gearcheck: Screen/fix common problems in flywheel gears.
+* eolfix: Fix text files (i.e.: any source code) to enforce LF line
+  endings and to ensure a single LF at EOF (no more, no less).
+* hadolint: Lint Dockerfile to enforce best practices with hadolint. Uses shellcheck
+  under the hood to lint the RUN instructions as well.
+* jsonlint: Lint JSON files for syntax, uniform indentation and style with jsonlint.
+  Formats .json files in-place to consistently use 2 spaces for indentation.
+* linkcheck: Check text files for dead links with a custom qa-ci script `linkcheck.py`.
+* markdownlint: Lint markdown files for syntax, line length, style and more with
+  `markdownlint`.
+* yamllint: Lint YAML files for syntax, uniform indentation and style with yamllint.
+* ruff_format: Format python code with ruff to ensure uniform whitespace and style.
+* ruff: Format python code with `ruff` to ensures uniform whitespace and
+  style. You can define the configuration in the `pyproject.toml`, in the
+  `tool.ruff` section.
+* ruff_tests: Lint python tests using less strict defaults with static
+  analyzer `ruff`.
+* pytest: Build the Gear Docker image and run python tests and report code
+  coverage with `pytest`.
 
-These hooks will all run automatically on commit, but can also be run manually
-or just be disabled.
+These hooks will all run automatically on commit, but can also be run
+manually or just be disabled.
+
+More hooks can be enabled upon need. List of available
+[hooks](https://gitlab.com/flywheel-io/tools/etc/qa-ci#table-of-contents).
 
 ### pre-commit usage
 
 * Run hooks manually:
   * Run on all files: `pre-commit run -a`
   * Run on certain files: `pre-commit run --files test/*`
+  * Run a specific pre-commit hook (`pytest` in this case):
+    `pre-commit run --all-files pytest`
 * Update (e.g. clean and install) hooks: `pre-commit clean && pre-commit install`
 * Disable all hooks: `pre-commit uninstall`
 * Enable all hooks: `pre-commit install`
@@ -86,13 +90,11 @@ or just be disabled.
 
 ## Adding a contribution
 
-Every contribution should be
-associated with a ticket on the GEAR JIRA board, or be a hotfix.
-You should contribute by creating
-a branch titled with either `hotfix-<hotfix_name` or `GEAR-<gear_num>-<description>`.
-For now, other branch names will be accepted,
-but soon branch names will be rejected
-if they don't follow this pattern.
+Every contribution should be associated with a ticket on the GEAR JIRA
+board, or be a hotfix. You should contribute by creating a branch titled
+with either `hotfix-<hotfix_name>` or `GEAR-<gear_num>-<description>`.
+For now, other branch names will be accepted, but soon branch names will
+be rejected if they don't follow this pattern.
 
 When contributing, make a Merge Request against the main branch.
 
@@ -105,38 +107,24 @@ The merge request should contain at least two things:
 
 Adding the release notes does two things:
 
-1. It makes it easier for the
-reviewer to identify what relevant changes
-they should expect and look for in the MR, and
+1. It makes it easier for the reviewer to identify what relevant changes they should
+   expect and look for in the MR, and
 2. It makes it easier to create a release.
 
-### Creating a release
+#### Populating release notes
 
-When your merge request is reviewed and approved, you should pull from main locally:
+For example, if the gear is currently on version `0.2.1` and you are
+working on a bugfix under the branch GEAR-999-my-bugfix. When you create
+a merge request against `main`, you should add a section to
+`docs/release_notes.md` such as the following:
 
-```bash
-git checkout main # Locally change to main branch
-git pull origin main # Locally pull updates from main branch
+```markdown
+## 0.2.2
+
+BUG:
+
+* Fixed my-bug, see [GEAR-999](https://flywheelio.atlassian.net/browse/GEAR-999)
+
 ```
 
-Then update the versions accordingly:
-
-1. Update poetry version: `poetry version <new_version>`
-2. Update the version in the manifest:
-    1. Update `"version"` key with new version
-    2. Update `"custom.gear-builder.image"` key with new image version
-3. Commit version changes
-
-Then you can tag the version and push:
-
-```bash
-git tag <new_version>
-git push origin main
-git push origin --tags
-```
-
-Once you've pushed tags,
-you can go to the gitlab UI -> Project Overview -> Releases and
-create a new release.
-You can copy the release notes that are
-already populated in the `docs/release_notes.md` document.
+Where the rest of the file contains release notes for previous versions.

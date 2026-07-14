@@ -57,15 +57,15 @@
     },
     "gear-builder": {
       "category": "qa",
-      "image": "flywheel/file-validator:0.3.7-rc.02"
+      "image": "flywheel/file-validator:0.3.7-rc03"
     }
   },
   "description": "Validates a file based on a provided validation schema",
   "environment": {
-    "BUILD_TIME": "2026-05-16T22:29:32Z",
-    "CI_JOB_URL": "https://gitlab.com/flywheel-io/tools/img/python/-/jobs/14403519717",
+    "BUILD_TIME": "2026-07-13T22:29:41Z",
+    "CI_JOB_URL": "https://gitlab.com/flywheel-io/tools/img/python/-/jobs/15325532645",
     "COMMIT_REF": "main",
-    "COMMIT_SHA": "424a5c77",
+    "COMMIT_SHA": "8cc432d1",
     "EDITOR": "micro",
     "EGET_BIN": "/opt/bin",
     "FLYWHEEL": "/flywheel/v0",
@@ -108,5 +108,5 @@
   "name": "file-validator",
   "source": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator.git",
   "url": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator.git",
-  "version": "0.3.7-rc.02"
+  "version": "0.3.7-rc03"
 }

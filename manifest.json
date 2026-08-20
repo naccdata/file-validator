@@ -20,7 +20,7 @@
     },
     "validation_level": {
       "default": "Validate File Contents",
-      "description": "Select if validation should run on the file or the flywheel representation of the file.  'Validate File Contents' will read the input file and run validation on it, 'Validate Flywheel Objects' will load the json representation of the file in flywheel, including the parent container objects of the file",
+      "description": "Select if validation should run on the file or the Flywheel representation of the file.  'Validate File Contents' will read the input file and run validation on it, 'Validate Flywheel Objects' will load the JSON representation of the file in Flywheel, including the parent container objects of the file",
       "enum": [
         "Validate File Contents",
         "Validate Flywheel Objects"
@@ -50,17 +50,17 @@
           "Any"
         ]
       },
+      "git": 31337,
       "show-job": true,
       "suite": "Utility",
-      "uid": 31337,
-      "git": 31337
+      "uid": 31337
     },
     "gear-builder": {
       "category": "qa",
       "image": "flywheel/file-validator:0.3.7-rc03"
     }
   },
-  "description": "Validates a file based on a provided validation schema",
+  "description": "Validates JSON or CSV file content, or a file's Flywheel metadata and parent container metadata, against a user-provided JSON Schema, either checking the raw file directly or the Flywheel object representation. Records the pass or fail result and any schema errors as metadata on the file, and optionally tags the file on completion. Validating Flywheel metadata requires it to already be populated, for example by the form-importer gear.",
   "environment": {
     "BUILD_TIME": "2026-07-13T22:29:41Z",
     "CI_JOB_URL": "https://gitlab.com/flywheel-io/tools/img/python/-/jobs/15325532645",
@@ -90,7 +90,8 @@
   },
   "inputs": {
     "api-key": {
-      "base": "api-key"
+      "base": "api-key",
+      "read-only": false
     },
     "input_file": {
       "base": "file",
@@ -103,10 +104,13 @@
     }
   },
   "label": "File Validator",
-  "license": "Other",
+  "license": "MIT",
   "maintainer": "Flywheel <support@flywheel.io>",
   "name": "file-validator",
-  "source": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator.git",
-  "url": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator.git",
+  "output_configuration": {
+    "enforce_file_version_match": true
+  },
+  "source": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator",
+  "url": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator",
   "version": "0.3.7-rc03"
 }

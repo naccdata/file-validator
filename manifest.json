@@ -57,7 +57,7 @@
     },
     "gear-builder": {
       "category": "qa",
-      "image": "flywheel/file-validator:0.3.7-rc03"
+      "image": "flywheel/file-validator:0.3.7"
     }
   },
   "description": "Validates JSON or CSV file content, or a file's Flywheel metadata and parent container metadata, against a user-provided JSON Schema, either checking the raw file directly or the Flywheel object representation. Records the pass or fail result and any schema errors as metadata on the file, and optionally tags the file on completion. Validating Flywheel metadata requires it to already be populated, for example by the form-importer gear.",
@@ -112,5 +112,5 @@
   },
   "source": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator",
   "url": "https://gitlab.com/flywheel-io/scientific-solutions/gears/file-validator",
-  "version": "0.3.7-rc03"
+  "version": "0.3.7"
 }

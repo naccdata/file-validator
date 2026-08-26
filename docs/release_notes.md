@@ -1,5 +1,23 @@
 # Release Notes
 
+## 0.3.7 [2026-08-26]
+
+__Enhancements__:
+
+- Updated `manifest.json` description to provide a detailed explanation of gear
+  capabilities, including JSON/CSV validation, Flywheel metadata validation, and
+  result recording behavior.
+- Added `output_configuration` with `enforce_file_version_match` to `manifest.json`.
+- Updated license from `Other` to `MIT` in `manifest.json`.
+
+__Maintenance__:
+
+- Updated base Docker image from `flywheel/python:3.13-main` to
+  `flywheel/python:3.13-wolfi-build`.
+- Removed `argparse==1.4.0` dependency from `pyproject.toml`.
+- Updated `CONTRIBUTING.md` to reflect `uv`-based workflow and standardized
+  pre-commit hooks.
+
 ## 0.3.6 [2025-12-17]
 
 __Maintenance__:

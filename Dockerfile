@@ -54,4 +54,5 @@ RUN uv pip install --no-deps -e. --no-cache-dir
 # Ensure the entrypoint script is executable
 RUN chmod a+x "${FLYWHEEL}/run.py"
 
+# hadolint ignore=DL3066
 USER flywheel

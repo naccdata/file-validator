@@ -62,10 +62,10 @@
   },
   "description": "Validates JSON or CSV file content, or a file's Flywheel metadata and parent container metadata, against a user-provided JSON Schema, either checking the raw file directly or the Flywheel object representation. Records the pass or fail result and any schema errors as metadata on the file, and optionally tags the file on completion. Validating Flywheel metadata requires it to already be populated, for example by the form-importer gear.",
   "environment": {
-    "BUILD_TIME": "2026-07-13T22:29:41Z",
-    "CI_JOB_URL": "https://gitlab.com/flywheel-io/tools/img/python/-/jobs/15325532645",
+    "BUILD_TIME": "2026-11-02T22:29:08Z",
+    "CI_JOB_URL": "https://gitlab.com/flywheel-io/tools/img/python/-/jobs/17680862727",
     "COMMIT_REF": "main",
-    "COMMIT_SHA": "8cc432d1",
+    "COMMIT_SHA": "b3c79efb",
     "EDITOR": "micro",
     "EGET_BIN": "/opt/bin",
     "FLYWHEEL": "/flywheel/v0",
